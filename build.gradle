@@ -8,8 +8,6 @@ buildscript {
 	}
 }
 
-// spring-cloud-dataflow-admin-yarn-1.0-1.noarch.rpm
-
 if (tasks.findByPath("artifactoryPublish")) {
 	artifactory {
 		publish {
@@ -55,7 +53,12 @@ configure(subprojects) { subproject ->
 		packageDescription = 'Spring Cloud Dataflow Service.'
 		packageGroup = 'Applications/Databases'
 		license = 'Apache License v2.0'
+		preInstall file("${rootProject.projectDir}/src/main/package/rpm/preinstall.sh")
+		postUninstall file("${rootProject.projectDir}/src/main/package/rpm/postuninstall.sh")
+
+
 		link('/opt/pivotal/dataflow', "/opt/pivotal/spring-cloud-dataflow-admin-yarn-$springCloudDataflowYarnVersion")
+		link('/usr/bin/dataflow-shell', '/opt/pivotal/dataflow/bin/dataflow-shell')
 	}
 
 	artifacts {
