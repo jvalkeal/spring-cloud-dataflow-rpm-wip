@@ -55,7 +55,7 @@ configure(subprojects) { subproject ->
 		packageDescription = 'Spring Cloud Dataflow Service.'
 		packageGroup = 'Applications/Databases'
 		license = 'Apache License v2.0'
-		link('/opt/pivotal/spring-cloud-dataflow-admin-yarn', "/opt/pivotal/spring-cloud-dataflow-admin-yarn-$springCloudDataflowYarnVersion")
+		link('/opt/pivotal/dataflow', "/opt/pivotal/spring-cloud-dataflow-admin-yarn-$springCloudDataflowYarnVersion")
 	}
 
 	artifacts {
