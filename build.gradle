@@ -13,7 +13,7 @@ if (tasks.findByPath("artifactoryPublish")) {
 		publish {
 			repository {
 				ivy {
-					artifactLayout = '[organization]/[revision]/spring-cloud-dataflow-admin-yarn-[revision]-1.noarch.[ext]'
+					artifactLayout = '[organization]/[revision]/spring-cloud-dataflow-admin-yarn-[revision]-[classifier].[ext]'
 				}
 			}
 		}
@@ -45,7 +45,7 @@ configure(subprojects) { subproject ->
 	}
 
 	ospackage {
-		release = 1
+		release = "${rootProject.release}"
 		arch = NOARCH
 		os = LINUX
 		user 'dataflow'
@@ -62,7 +62,9 @@ configure(subprojects) { subproject ->
 	}
 
 	artifacts {
-		archives buildRpm
+		archives buildRpm {
+			classifier "${rootProject.release}.noarch"
+		}
 	}
 }
 
