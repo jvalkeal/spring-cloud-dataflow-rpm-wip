@@ -13,7 +13,7 @@ if (tasks.findByPath("artifactoryPublish")) {
 		publish {
 			repository {
 				ivy {
-					artifactLayout = '[organization]/[revision]/spring-cloud-dataflow-admin-yarn-[revision]-[classifier].[ext]'
+					artifactLayout = '[organization]/[revision]/spring-cloud-dataflow-server-yarn-[revision]-[classifier].[ext]'
 				}
 			}
 		}
@@ -36,7 +36,7 @@ configure(subprojects) { subproject ->
 	}
 
 	dependencies {
-		rpm "org.springframework.cloud.dist:spring-cloud-dataflow-admin-yarn-dist:$springCloudDataflowYarnVersion@zip"
+		rpm "org.springframework.cloud.dist:spring-cloud-dataflow-server-yarn-dist:$springCloudDataflowYarnVersion@zip"
 	}
 
 	task explodeDist(type: Copy) {
@@ -57,7 +57,7 @@ configure(subprojects) { subproject ->
 		postUninstall file("${rootProject.projectDir}/src/main/package/rpm/postuninstall.sh")
 
 
-		link('/opt/pivotal/dataflow', "/opt/pivotal/spring-cloud-dataflow-admin-yarn-$springCloudDataflowYarnVersion")
+		link('/opt/pivotal/dataflow', "/opt/pivotal/spring-cloud-dataflow-server-yarn-$springCloudDataflowYarnVersion")
 		link('/usr/bin/dataflow-shell', '/opt/pivotal/dataflow/bin/dataflow-shell')
 	}
 
@@ -71,7 +71,7 @@ configure(subprojects) { subproject ->
 project('noarch') {
 	buildRpm.dependsOn explodeDist
 	buildRpm {
-		packageName = 'spring-cloud-dataflow-admin-yarn'
+		packageName = 'spring-cloud-dataflow-server-yarn'
 		from("${buildDir}/unpacked/dist") {
 			into '/opt/pivotal'
 		}
